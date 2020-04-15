@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="custom.css" >
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+    <style>
+        .orange{
+           
+        }
+        </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light navbar-fixed-top">
+        <a class="navbar-brand" href="#">Welcome</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="dashboard">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="schedules">Schedules</a>
+                 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings">Settings</a>
+                 
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+             
+                <a class="btn btn-outline-success my-2 my-sm-0" href=logout >LogOut</a>
+            </form>
+        </div>
+    </nav>
+    <div class=container><center>Add Your Schedule<center>
+        <form method="post" action="schedules">
+            <div class="acc_change">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label> 
+                    <input name="name_sub" type="text" class="form-text " id="exampleInputEmail1" aria-describedby="emailHelp" >
+                
+                  </div>
+            <div class="form-group">
+             
+              <input type="datetime-local" id="birthdaytime" name="sub_time">
+           
+            </div>
+    
+          
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </div><br>
+            <button type="submit" class="btn btn-primary">Check and Show Class</button>
+          </form>
+
+
+
+    </div>
+    <br><br>
+    <div class="container">
+        <% var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+%>
+
+
+
+
+<div class="card-deck ">
+    <% for(var i=auth.name_sub.length-1;i>=0; i--) { %>
+        <% var res=auth.sub_time[i].substr(0,10)%>
+            <% if(res==today) color_maker='bg-danger'    %>  
+
+            <% if (parseInt(res.substr(8))+5 < parseInt(dd)) color_maker='bg-warning'    %> 
+            
+            
+            <%= parseInt(res.substr(8)) %> <%= parseInt(dd)+5 %>
+        <div class="column ">
+    <div class="card <%= color_maker %>" >
+        <img class="card-img-top" src="holder.js/100x180/" alt="">
+        <div class="card-body">
+            <h4 class="card-title"><%= auth.name_sub[i] %></h4>
+           
+            
+            <p class="card-text"><%=  auth.sub_time[i].substr(0,10) %></p>
+            <p class="card-text"><%= auth.sub_time[i].substr(11,15) %></p>
+           
+        </div>
+    </div>
+    </div>
+
+    <% } %>
+  
+</div>
+</body>
+</html> <!--<p class="card-text"><%= auth.sub_time[0] %></p>  <% for(var i=0;i<=1; i++) { %><%= auth.name_sub[i] %> <% } %> -->

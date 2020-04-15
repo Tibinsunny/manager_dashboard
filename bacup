@@ -84,3 +84,9 @@ app.get('/dashboard',val,function(req,res)
 {
     res.render('dashboard')
 })
+
+
+db.reg.update(
+   { name: "tibin" },
+   { $push: { subjects:"COaaaA",time:"702"} }
+)

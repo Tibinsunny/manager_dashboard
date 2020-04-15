@@ -136,7 +136,7 @@ app.post('/update',async(req,res)=>
     var email=req.body.email
     if(req.session.uid)
     {
-         const auth=await connector.update({_id:req.session.uid},{$set:{department:department,name:name,email:email}})
+     const auth=await connector.update({_id:req.session.uid},{$set:{department:department,name:name,email:email}})
 res.redirect('settings')
     }
     else
@@ -146,13 +146,41 @@ res.redirect('settings')
 })
 
 
-app.get('/logout',function(req,res)
+
+app.get('/schedules',async(req,res)=>
 {
- req.session.destroy()
- res.redirect('/')
+    if(req.session.uid)
+    {
+        const auth=await connector.findOne({_id:req.session.uid})
+ res.render('schedule',{auth:auth})
+    }
+    else
+    {
+        res.redirect('/')
+    }
+})
+
+app.post('/schedules',async(req,res) =>
+{
+    if(req.session.uid)
+    {
+        var name_sub=req.body.name_sub
+        var sub_time=req.body.sub_time
+        const auth=await connector.updateOne({ _id:req.session.uid },{ $push: { name_sub:name_sub,sub_time:sub_time} })
+        
+        res.redirect('schedules')
+    }
+    else
+    {
+        res.redirect('/')
+    }
 })
 
 
 
 
-
+app.get('/logout',function(req,res)
+{
+ req.session.destroy()
+ res.redirect('/')
+})

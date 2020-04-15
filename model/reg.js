@@ -12,7 +12,13 @@ const conn=new mongoose.Schema({
     },
     department:{
         type:String,
-    }
+    },
+    name_sub:{
+        type:[String],
+    },
+    sub_time:{
+        type:[String],
+    },
 
 })
 module.exports=mongoose.model('reg',conn)
