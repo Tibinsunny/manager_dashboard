@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(6, 215, 152, 1) 0%,
+    rgba(135, 219, 213, 1) 30%,
+    rgba(32, 204, 158, 1) 70%
+  );
+  
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 100px;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 25em;
+  height: 40em;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+}
+
+.items input {
+  margin-bottom: 30px;
+  padding: 2px 0px;
+  padding-bottom: 5px;
+  width: 250px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1.5px solid;
+  border-bottom-color: grey;
+  font-weight: 700;
+  color: #585858;
+  opacity: 0.55;
+}
+
+#title {
+  margin-bottom: 50px;
+  letter-spacing: 5px;
+  text-align: center;
+  opacity: 0.5;
+}
+
+#button {
+  padding: 20px 30px;
+  margin-top: 30px;
+  outline: none;
+  border: none;
+  font-size: medium;
+  font-weight: 600;
+  letter-spacing: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(6, 215, 152, 1) 0%,
+    rgba(32, 204, 158, 1) 30%,
+    rgba(135, 219, 213, 1) 70%
+  );
+  color: grey;
+}
+
+#button:active {
+  transform: translateY(2px);
+}
+
+#button text {
+  opacity: 0.5;
+}
+
+#sign {
+  margin-top: 4em;
+  text-align: center;
+  letter-spacing: 5px;
+  cursor: pointer;
+  color: rgb(11, 194, 142);
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+#sign:active {
+  transform: translateY(2px);
+}
+
+::placeholder {
+  color: grey;
+  text-align: center;
+  letter-spacing: 2px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="javascripts/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 id="title">Register</h2>
+      
+        <div class="items">
+            <form action="/signup" method="POST">
+          <input name="name" type="text" id="form-text" placeholder="Username" /> <font color=red size=2px>
+         
+            <%= msg %></font>
+          <input name="email" type="text" id="form-password" placeholder="Email" />
+          <input name="department" type="text" id="form-password" placeholder="department" />
+         
+          <input name="password" type="password" id="form-password" placeholder="Password" />
+        
+      
+          <input id="button" type="submit" value=Register> </input>
+          <a id="sign" type="submit" href="/">Login</a>
+        </form>
+        </div>
+      </div>
+</body>
+</html>
