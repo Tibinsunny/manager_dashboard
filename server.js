@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended:false}))
 //Session MiddleWare
 app.use(session({
     secret: 'keyboard cat', 
-    cookie: { maxAge: 6000000 },
+    cookie: { maxAge: 60000000 },
     resave: false,
     saveUninitialized: false
   }));
@@ -50,7 +50,6 @@ app.post('/signup',async(req,res)=>
     var department=req.body.department
     var query={"email":email}
     const check_data=await connector.findOne(query)
-    console.log(check_data)
     if(check_data==null)
     {
 
@@ -83,10 +82,11 @@ app.post('/',async(req,res)=>
     var password=req.body.password
    
     const auth=await connector.findOne({name:name,password:password})
-    req.session.uid=auth._id
+
+
     if(auth!=null)
     {
-       
+        req.session.uid=auth.id
        res.redirect('/dashboard')
        
     }
@@ -100,19 +100,51 @@ app.post('/',async(req,res)=>
 
 app.get('/dashboard',async(req,res) =>
 {
-    req.session.uid=auth.id
+   
     if(req.session.uid)
     {
       
 const auth=await connector.findOne({_id:req.session.uid})
-
+console.log(auth)
     res.render('dashboard',{auth:auth})
 }
     else
     {
         res.redirect('/')
+ }
+})
+
+
+
+app.get('/settings',async(req,res) =>
+{
+    if(req.session.uid)
+    {
+         const auth=await connector.findOne({_id:req.session.uid})
+res.render('settings',{auth:auth})
+    }
+    else
+    {
+    res.redirect('/')
     }
 })
+
+app.post('/update',async(req,res)=>
+{
+    var name=req.body.name
+    var department=req.body.department
+    var email=req.body.email
+    if(req.session.uid)
+    {
+         const auth=await connector.update({_id:req.session.uid},{$set:{department:department,name:name,email:email}})
+res.redirect('settings')
+    }
+    else
+    {
+    res.redirect('/')
+    }
+})
+
 
 app.get('/logout',function(req,res)
 {
